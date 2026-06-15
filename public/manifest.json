@@ -1,0 +1,14 @@
+{
+  "name": "Casa Clínic CRM",
+  "short_name": "CasaCRM",
+  "description": "Casa Clinic Aesthetics - Lead Management",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EAE6DF",
+  "theme_color": "#C9A96E",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/logo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
