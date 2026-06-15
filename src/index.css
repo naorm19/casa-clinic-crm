@@ -92,7 +92,7 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text-1)
 }
 .bottom-nav-inner {
   display:flex; flex-direction:row; align-items:center; justify-content:space-around;
-  height:100%; padding:0 8px;
+  height:100%; padding:0 8px; direction:ltr;
 }
 .bottom-nav-btn {
   flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
