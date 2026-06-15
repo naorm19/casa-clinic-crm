@@ -1,6 +1,35 @@
+import { useState } from 'react'
 import { format, isToday, isPast, isTomorrow, isThisMonth } from 'date-fns'
 import { he } from 'date-fns/locale'
-import { Plus, Bell, Phone, MessageCircle, ChevronLeft, Users, CheckCircle, Clock, MapPin } from 'lucide-react'
+import { Plus, Bell, Phone, MessageCircle, ChevronLeft, Users, CheckCircle, Clock, MapPin, X, Share, Download } from 'lucide-react'
+
+function isIOS() { return /iphone|ipad|ipod/i.test(navigator.userAgent) }
+function isInStandaloneMode() { return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone }
+
+function PwaBanner() {
+  const [dismissed, setDismissed] = useState(() => sessionStorage.getItem('pwa-dismissed') === '1')
+  if (dismissed || isInStandaloneMode()) return null
+
+  const dismiss = () => { sessionStorage.setItem('pwa-dismissed','1'); setDismissed(true) }
+
+  return (
+    <div className="pwa-banner">
+      <div className="pwa-banner-icon">
+        <img src="/logo.png" alt="Casa Clinic" style={{width:'100%',height:'100%',objectFit:'cover'}}/>
+      </div>
+      <div className="pwa-banner-text">
+        <strong>התקיני את האפליקציה על האייפון</strong>
+        <span>
+          {isIOS()
+            ? <>לחצי על <Share size={11} style={{display:'inline',verticalAlign:'middle'}}/> ואז "הוסף למסך הבית" — תקבלי תזכורות גם כשהאפליקציה סגורה</>
+            : <>לחצי על התפריט ← "התקן אפליקציה" — תקבלי תזכורות גם כשהאפליקציה סגורה</>
+          }
+        </span>
+      </div>
+      <button className="pwa-banner-close" onClick={dismiss}><X size={16}/></button>
+    </div>
+  )
+}
 
 const wa = phone => `https://wa.me/972${(phone||'').replace(/[-\s]/g,'').replace(/^0/,'')}`
 
@@ -36,16 +65,19 @@ export default function Dashboard({ leads, onAdd, onEdit, onNav, USE_DEMO }) {
   return (
     <div className="anim-fade-in">
 
+      {/* ── PWA install banner ── */}
+      <PwaBanner />
+
       {/* ── Welcome strip ── */}
       <div className="welcome-strip" style={{marginBottom:28}}>
         <img src="/bg.jpg" alt="" />
         <div className="welcome-strip-overlay" />
         <div className="welcome-strip-text">
-          <p style={{fontSize:10,color:'rgba(255,255,255,.65)',letterSpacing:'.18em',textTransform:'uppercase',marginBottom:6}}>ברוכה הבאה</p>
-          <h1 className="playfair" style={{fontSize:28,color:'#fff',fontWeight:400,lineHeight:1.15,textShadow:'0 2px 16px rgba(0,0,0,.3)'}}>
+          <p style={{fontSize:10,color:'rgba(255,255,255,.6)',letterSpacing:'.2em',textTransform:'uppercase',marginBottom:8}}>ברוכה הבאה</p>
+          <h1 className="playfair" style={{fontSize:32,color:'#fff',fontWeight:400,lineHeight:1.1,textShadow:'0 2px 20px rgba(0,0,0,.4)',marginBottom:6}}>
             Casa Clínic Aesthetics
           </h1>
-          <p style={{fontSize:12,color:'rgba(255,255,255,.55)',marginTop:4}}>
+          <p style={{fontSize:13,color:'rgba(255,255,255,.6)'}}>
             {format(new Date(),'EEEE, d בMMMM yyyy',{locale:he})}
           </p>
         </div>

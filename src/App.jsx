@@ -49,15 +49,7 @@ export const USE_DEMO = !import.meta.env.VITE_SUPABASE_URL
 
 const d = n => new Date(Date.now()+n*864e5).toISOString().slice(0,10)
 
-const DEMO_LEADS = [
-  { id:'1', entry_date:d(0),  name:'שירה כהן',   phone:'054-123-4567', treatment:'בוטוקס',               status:'ממתין',       area:'מבשרת ציון',  source:'Meta (פייסבוק/אינסטגרם)', notes:'', reminder_at:new Date(Date.now()+36e5).toISOString(),  reminder_note:'לאשר שעה מדויקת' },
-  { id:'2', entry_date:d(-1), name:'מיכל לוי',   phone:'052-987-6543', treatment:'פילר / חומצה היאלורונית', status:'אין מענה',   area:'נווה אילן',    source:'המלצה',                   notes:'', reminder_at:new Date(Date.now()+72e5).toISOString(),  reminder_note:'לנסות שוב בערב' },
-  { id:'3', entry_date:d(-2), name:'נועה מזרחי', phone:'050-555-5555', treatment:'הסרת שיער לייזר',       status:'נקבע טיפול', area:'הר אדר',       source:'Meta (פייסבוק/אינסטגרם)', notes:'', reminder_at:null, reminder_note:'' },
-  { id:'4', entry_date:d(-3), name:'תמר גולן',   phone:'053-444-4444', treatment:'טיפול פנים / שיקום עור', status:'נסגרה',      area:'מבשרת ציון',  source:'Google',                  notes:'לקוחה מרוצה', reminder_at:null, reminder_note:'' },
-  { id:'5', entry_date:d(-4), name:'דנה אברהם',  phone:'058-777-7777', treatment:'בוטוקס',               status:'רחוק לה',    area:'תל אביב',     source:'Meta (פייסבוק/אינסטגרם)', notes:'אמרה שרחוק לה', reminder_at:null, reminder_note:'' },
-  { id:'6', entry_date:d(0),  name:'יעל שפירא',  phone:'050-999-1234', treatment:'פיגמנטציה',            status:'חזרה אלינו', area:'קריית יערים', source:'אינסטגרם אורגני',         notes:'', reminder_at:new Date(Date.now()-72e5).toISOString(),  reminder_note:'פנתה פעמיים — לחזור' },
-  { id:'7', entry_date:d(-1), name:'רחל ברק',    phone:'054-321-9876', treatment:'בוטוקס',               status:'יקר לה',     area:'ירושלים (מרכז)', source:'Meta (פייסבוק/אינסטגרם)', notes:'מחיר גבוה לדעתה', reminder_at:null, reminder_note:'' },
-]
+const DEMO_LEADS = []
 
 const EMPTY = {
   entry_date: d(0), name:'', phone:'', treatment:'', status:'ממתין',

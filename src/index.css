@@ -303,11 +303,24 @@ select.inp { appearance:none; cursor:pointer; }
 /* ── Welcome hero strip ── */
 .welcome-strip {
   position:relative; border-radius:var(--radius-lg); overflow:hidden;
-  margin-bottom:28px; height:140px;
+  margin-bottom:28px; height:220px;
 }
-.welcome-strip img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%; }
-.welcome-strip-overlay { position:absolute; inset:0; background:linear-gradient(90deg,rgba(15,14,13,.6) 0%,rgba(15,14,13,.25) 60%,transparent 100%); }
-.welcome-strip-text { position:relative; z-index:2; padding:28px 32px; height:100%; display:flex; flex-direction:column; justify-content:center; }
+.welcome-strip img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 40%; }
+.welcome-strip-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(10,9,8,.72) 0%,rgba(10,9,8,.35) 55%,rgba(10,9,8,.1) 100%); }
+.welcome-strip-text { position:relative; z-index:2; padding:36px 40px; height:100%; display:flex; flex-direction:column; justify-content:flex-end; }
+
+/* ── PWA install banner ── */
+.pwa-banner {
+  display:flex; align-items:center; gap:14px;
+  background:linear-gradient(135deg,rgba(201,169,110,.15),rgba(201,169,110,.05));
+  border:1px solid rgba(201,169,110,.3); border-radius:var(--radius-lg);
+  padding:16px 20px; margin-bottom:20px;
+}
+.pwa-banner-icon { width:44px; height:44px; border-radius:12px; overflow:hidden; flex-shrink:0; border:1px solid rgba(201,169,110,.2); }
+.pwa-banner-text { flex:1; }
+.pwa-banner-text strong { display:block; font-size:13px; color:var(--text-1); font-weight:600; margin-bottom:3px; }
+.pwa-banner-text span { font-size:12px; color:var(--text-3); line-height:1.5; }
+.pwa-banner-close { background:none; border:none; cursor:pointer; color:var(--text-3); padding:4px; display:flex; }
 
 /* ── Empty state ── */
 .empty-state { text-align:center; padding:60px 20px; }
@@ -351,9 +364,10 @@ select.inp { appearance:none; cursor:pointer; }
   .kpi-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
   .kpi-card { padding:14px 12px; }
   .kpi-num { font-size:24px; }
-  .welcome-strip { height:100px; }
-  .welcome-strip-text { padding:16px 18px; }
-  .welcome-strip-text h1 { font-size:20px !important; }
+  .welcome-strip { height:180px; border-radius:16px; }
+  .welcome-strip-text { padding:20px 22px; }
+  .welcome-strip-text h1 { font-size:22px !important; }
+  .pwa-banner { padding:12px 14px; gap:10px; }
   .leads-table { display:none; }
   .leads-mobile { display:flex; flex-direction:column; gap:12px; }
   .page-title { font-size:22px; }
