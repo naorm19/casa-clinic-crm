@@ -1,11 +1,18 @@
 import { useEffect, useRef } from 'react'
 import { format } from 'date-fns'
-import { X, Phone, MessageCircle, Bell, CheckCircle } from 'lucide-react'
+import { X, Phone, MessageCircle, Bell, CheckCircle, PhoneMissed } from 'lucide-react'
 
 const wa = phone => `https://wa.me/972${(phone||'').replace(/[-\s]/g,'').replace(/^0/,'')}`
 
-export default function LeadDrawer({ form, setForm, saving, onSave, onClose, isNew, openReminder, STATUSES, TREATMENTS, AREAS, SOURCES }) {
+export default function LeadDrawer({ form, setForm, saving, onSave, onClose, isNew, openReminder, STATUSES, TREATMENTS, SOURCES }) {
   const set = (k,v) => setForm(f=>({...f,[k]:v}))
+
+  const logCallAttempt = () => {
+    const now = new Date()
+    const stamp = `📞 ${now.getDate()}/${now.getMonth()+1} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')} — ניסיון חזרה`
+    const prevNotes = form.notes ? form.notes + '\n' : ''
+    setForm(f => ({ ...f, status: 'אין מענה', notes: prevNotes + stamp }))
+  }
   const reminderRef = useRef(null)
 
   useEffect(() => {
@@ -56,12 +63,19 @@ export default function LeadDrawer({ form, setForm, saving, onSave, onClose, isN
                   <MessageCircle size={12}/>WhatsApp
                 </a>
                 <button
+                  className="btn-action"
+                  style={{flex:1,justifyContent:'center',padding:'8px 0',fontSize:12,background:'#FEE2E2',color:'#991B1B'}}
+                  onClick={logCallAttempt}
+                >
+                  <PhoneMissed size={12}/>אין מענה
+                </button>
+                <button
                   className="btn-action close-lead"
                   style={{flex:1,justifyContent:'center',padding:'8px 0',fontSize:12}}
                   onClick={()=>set('status','נסגרה')}
                   disabled={form.status==='נסגרה'}
                 >
-                  <CheckCircle size={12}/>סמני נסגר
+                  <CheckCircle size={12}/>נסגרה
                 </button>
               </div>
             )}
@@ -82,19 +96,10 @@ export default function LeadDrawer({ form, setForm, saving, onSave, onClose, isN
               </div>
             </div>
 
-            {/* phone + area */}
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}}>
-              <div>
-                <label className="inp-label">טלפון</label>
-                <input className="inp" placeholder="05X-XXX-XXXX" dir="ltr" value={form.phone} onChange={e=>set('phone',e.target.value)}/>
-              </div>
-              <div>
-                <label className="inp-label">אזור מגורים 📍</label>
-                <select className="inp" value={form.area||''} onChange={e=>set('area',e.target.value)}>
-                  <option value="">בחרי אזור...</option>
-                  {(AREAS||[]).map(a=><option key={a} value={a}>{a}</option>)}
-                </select>
-              </div>
+            {/* phone */}
+            <div>
+              <label className="inp-label">טלפון</label>
+              <input className="inp" placeholder="05X-XXX-XXXX" dir="ltr" value={form.phone} onChange={e=>set('phone',e.target.value)}/>
             </div>
 
             {/* treatment + source */}
@@ -108,8 +113,7 @@ export default function LeadDrawer({ form, setForm, saving, onSave, onClose, isN
               </div>
               <div>
                 <label className="inp-label">מקור הליד</label>
-                <select className="inp" value={form.source||''} onChange={e=>set('source',e.target.value)}>
-                  <option value="">בחרי מקור...</option>
+                <select className="inp" value={form.source||'Meta (פייסבוק/אינסטגרם)'} onChange={e=>set('source',e.target.value)}>
                   {(SOURCES||[]).map(s=><option key={s}>{s}</option>)}
                 </select>
               </div>

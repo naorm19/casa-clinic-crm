@@ -42,7 +42,7 @@ export const AREAS = [
 ]
 
 export const SOURCES = [
-  'Meta (פייסבוק/אינסטגרם)','Google','המלצה','אינסטגרם אורגני','טיקטוק','אחר',
+  'Meta (פייסבוק/אינסטגרם)','טיקטוק','המלצה','אחר',
 ]
 
 export const USE_DEMO = !import.meta.env.VITE_SUPABASE_URL
@@ -53,7 +53,7 @@ const DEMO_LEADS = []
 
 const EMPTY = {
   entry_date: d(0), name:'', phone:'', treatment:'', status:'ממתין',
-  area:'', source:'', notes:'', reminder_at:'', reminder_note:'',
+  source:'Meta (פייסבוק/אינסטגרם)', notes:'', reminder_at:'', reminder_note:'',
 }
 
 /* ══════════════════════════════ APP ══ */
