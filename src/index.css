@@ -88,17 +88,17 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text-1)
 }
 .bottom-nav-btn {
   flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:4px; border:none; background:none; cursor:pointer; color:var(--text-3);
-  font-size:10px; font-weight:500; transition:all .2s; padding:6px 4px; border-radius:12px;
-  position:relative;
+  gap:5px; border:none; background:none; cursor:pointer; color:var(--text-3);
+  font-size:10px; font-weight:500; transition:all .2s; padding:8px 4px 6px; border-radius:12px;
 }
-.bottom-nav-btn span { letter-spacing:.01em; }
+.bottom-nav-btn .nav-icon-wrap {
+  width:40px; height:28px; display:flex; align-items:center; justify-content:center;
+  border-radius:100px; transition:all .2s;
+}
+.bottom-nav-btn span { letter-spacing:.01em; line-height:1; }
 .bottom-nav-btn.active { color:var(--gold-deep); }
-.bottom-nav-btn.active svg { color:var(--gold); }
-.bottom-nav-btn.active::before {
-  content:''; position:absolute; top:5px; left:50%; transform:translateX(-50%);
-  width:24px; height:3px; background:var(--gold); border-radius:100px;
-  opacity:.7;
+.bottom-nav-btn.active .nav-icon-wrap {
+  background:rgba(201,169,110,.18);
 }
 
 /* ── KPI Cards ── */

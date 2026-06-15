@@ -1,11 +1,11 @@
-import { Bell, LayoutDashboard, Users, Sparkles, Settings, X } from 'lucide-react'
+import { Bell, Home, Users, Sparkles, Settings, X } from 'lucide-react'
 
 const NAV = [
-  { id:'dashboard',  label:'דשבורד',    mLabel:'בית',      Icon:LayoutDashboard },
-  { id:'leads',      label:'פניות',      mLabel:'פניות',    Icon:Users },
-  { id:'reminders',  label:'תזכורות',   mLabel:'תזכורות',  Icon:Bell },
-  { id:'treatments', label:'טיפולים',   mLabel:'טיפולים',  Icon:Sparkles },
-  { id:'settings',   label:'הגדרות',    mLabel:'הגדרות',   Icon:Settings },
+  { id:'dashboard',  label:'דשבורד',  mLabel:'בית',       Icon:Home },
+  { id:'leads',      label:'פניות',    mLabel:'פניות',     Icon:Users },
+  { id:'reminders',  label:'תזכורות', mLabel:'תזכורות',   Icon:Bell },
+  { id:'treatments', label:'טיפולים', mLabel:'טיפולים',   Icon:Sparkles },
+  { id:'settings',   label:'הגדרות',  mLabel:'הגדרות',    Icon:Settings },
 ]
 
 export default function Layout({ children, page, onNav, toast, onDismissToast, overdueCount }) {
@@ -86,7 +86,9 @@ export default function Layout({ children, page, onNav, toast, onDismissToast, o
               className={`bottom-nav-btn${page===id?' active':''}`}
               onClick={()=>onNav(id)}
             >
-              <Icon size={20}/>
+              <div className="nav-icon-wrap">
+                <Icon size={22} strokeWidth={page===id ? 2 : 1.5}/>
+              </div>
               <span>{mLabel}</span>
             </button>
           ))}
