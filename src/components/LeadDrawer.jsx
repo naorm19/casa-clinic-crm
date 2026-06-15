@@ -85,7 +85,7 @@ export default function LeadDrawer({ form, setForm, saving, onSave, onClose, isN
           <div style={{padding:'24px 28px',display:'flex',flexDirection:'column',gap:18}}>
 
             {/* date + name */}
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1.5fr',gap:14}}>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(140px,1fr))',gap:14}}>
               <div>
                 <label className="inp-label">תאריך פנייה</label>
                 <input type="date" className="inp" dir="ltr" value={form.entry_date} onChange={e=>set('entry_date',e.target.value)}/>
