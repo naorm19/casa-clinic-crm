@@ -76,10 +76,11 @@ export default function App() {
 
   useEffect(() => {
     if (USE_DEMO) return
-    const ch = supabase.channel('leads')
+    const ch = supabase.channel('leads-rt')
       .on('postgres_changes',{event:'*',schema:'public',table:'leads'},load)
       .subscribe()
-    return () => supabase.removeChannel(ch)
+    const poll = setInterval(load, 30000)
+    return () => { supabase.removeChannel(ch); clearInterval(poll) }
   }, [load])
 
   /* ── notification polling ── */
