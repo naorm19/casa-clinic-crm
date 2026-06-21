@@ -83,6 +83,30 @@ export default function App() {
     return () => { supabase.removeChannel(ch); clearInterval(poll) }
   }, [load])
 
+  /* ── auto-update PWA when a new build is deployed ── */
+  useEffect(() => {
+    const currentScript = document.querySelector('script[type="module"]')?.getAttribute('src')
+    if (!currentScript) return
+
+    const checkForUpdate = async () => {
+      try {
+        const res = await fetch('/', { cache: 'no-store' })
+        const html = await res.text()
+        const match = html.match(/<script[^>]*type="module"[^>]*src="([^"]+)"/)
+        const latestScript = match?.[1]
+        if (latestScript && latestScript !== currentScript) {
+          window.location.reload()
+        }
+      } catch {}
+    }
+
+    const iv = setInterval(checkForUpdate, 60000)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') checkForUpdate()
+    })
+    return () => clearInterval(iv)
+  }, [])
+
   /* ── notification polling ── */
   useEffect(() => {
     if ('Notification' in window && Notification.permission==='default') Notification.requestPermission()
